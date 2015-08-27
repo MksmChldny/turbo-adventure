@@ -33,7 +33,7 @@ public class SingerResourceTest {
             resources.client().target("/singer/123").request().get(Singer.class);
         } catch (WebApplicationException e) {
 
-            assertThat(e.getResponse().getStatus(), is(404));
+            assertThat(e.getResponse().getStatus(), is(405));
             throw e;
         }
 

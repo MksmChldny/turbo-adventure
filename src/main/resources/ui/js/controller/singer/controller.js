@@ -41,8 +41,8 @@ turboAdventure.controller('SingerController', function ($scope, Restangular) {
         $scope.singerListLoaded = false;
 
         var singerParameter = {
-            "Firstname": $scope.newSinger.firstname,
-            "Lastname": $scope.newSinger.lastname
+            "firstname": $scope.newSinger.firstname,
+            "lastname": $scope.newSinger.lastname
         };
         var encodedFormData = $.param(singerParameter);
 
@@ -63,7 +63,7 @@ turboAdventure.controller('SingerController', function ($scope, Restangular) {
 
     $scope.cancelEditSinger = function() {
         $scope.editMode = false;
-        $scope.singer ListLoaded = false;
+        $scope.singerListLoaded = false;
 
         Restangular.one('singer').get().then(function (data) {
             $scope.initSingerList(data.singer);

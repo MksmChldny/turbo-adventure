@@ -5,6 +5,8 @@ import static org.hamcrest.core.Is.is;
 
 import java.util.Arrays;
 import de.atomfrede.github.karaoke.server.entity.Song;
+
+import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.Before;
@@ -58,12 +60,13 @@ public class SongRepositoryTest {
 
 		new NonStrictExpectations() {
 			{
-				mongoCollection.remove("{_id:#}", "24");
+				
+				mongoCollection.remove("{_id:#}", new ObjectId ("55d357aec7aefa137de14fe1"));
 				times = 1;
 			}
 		};
 
-		songRepository.delete("24");
+		songRepository.delete("55d357aec7aefa137de14fe1");
 		// deleteMethode aufrufen, id 24 löschen
 	}
 
@@ -73,17 +76,17 @@ public class SongRepositoryTest {
 		new NonStrictExpectations() {
 			{
 
-				mongoCollection.remove("{_id:#}", "24");
+				mongoCollection.remove("{_id:#}", "55d357aec7aefa137de14fe1");
 				times = 1;
 
-				mongoCollection.remove("{_id:#}", "71");
+				mongoCollection.remove("{_id:#}", "55d357aec7aefa137de14fe2");
 				times = 1;
 			}
 		};
 
-		Song SongA = new Song("24").setTitle("SongA").setInterpreter("InterpreterA");
+		Song SongA = new Song("55d357aec7aefa137de14fe1").setTitle("SongA").setInterpreter("InterpreterA");
 
-		Song SongB = new Song("71").setTitle("SongA").setInterpreter("InterpreterB");
+		Song SongB = new Song("55d357aec7aefa137de14fe2").setTitle("SongA").setInterpreter("InterpreterB");
 
 		songRepository.delete(Arrays.asList(SongA, SongB));
 	}

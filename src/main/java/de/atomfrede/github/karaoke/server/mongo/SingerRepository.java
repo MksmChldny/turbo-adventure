@@ -27,7 +27,7 @@ public class SingerRepository extends JongoManaged implements CrudRepository<Sin
 
     @Override
     public void delete(String s) {
-        collection.remove(ID_QUERY, s);
+        collection.remove(ID_QUERY, new ObjectId(s));
     }
 
     @Override

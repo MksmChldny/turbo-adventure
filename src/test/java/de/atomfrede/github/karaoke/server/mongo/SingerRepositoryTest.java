@@ -5,6 +5,8 @@ import de.atomfrede.github.karaoke.server.entity.Singer;
 import mockit.Mocked;
 import mockit.NonStrictExpectations;
 import mockit.integration.junit4.JMockit;
+
+import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.junit.Before;
@@ -19,95 +21,101 @@ import static org.hamcrest.core.Is.is;
 @RunWith(JMockit.class)
 public class SingerRepositoryTest {
 
-    @Mocked
-    DB database;
-    @Mocked
-    MongoCollection mongoCollection;
-    @Mocked
-    Jongo jongo;
+	@Mocked
+	DB database;
+	@Mocked
+	MongoCollection mongoCollection;
+	@Mocked
+	Jongo jongo;
 
-    SingerRepository singerRepository;
+	SingerRepository singerRepository;
 
-    @Before
-    public void setup() {
-        singerRepository = new SingerRepository(database);
-    }
+	@Before
+	public void setup() {
+		singerRepository = new SingerRepository(database);
+	}
 
-    @Test
-    public void assertThatCountIsReturned() {
+	@Test
+	public void assertThatCountIsReturned() {
 
-        new NonStrictExpectations() {{
+		new NonStrictExpectations() {
+			{
 
-            mongoCollection.count();
-            times = 1;
-            result = 42;
-        }};
+				mongoCollection.count();
+				times = 1;
+				result = 42;
+			}
+		};
 
-        assertThat(singerRepository.count(), is(42L));
-    }
+		assertThat(singerRepository.count(), is(42L));
+	}
 
-    @Test
-    public void assertThatEntityIsRemovedById() {
+	@Test
+	public void assertThatEntityIsRemovedById() {
 
-        new NonStrictExpectations() {{
+		new NonStrictExpectations() {
+			{
 
-            mongoCollection.remove("{_id:#}", "42");
-            times = 1;
-        }};
+				mongoCollection.remove("{_id:#}", new ObjectId ("55dedd2b708db71cb20ca959"));
+				times = 1;
+			}
+		};
 
-        singerRepository.delete("42");
-    }
+		singerRepository.delete("55dedd2b708db71cb20ca959");
+	}
 
-    @Test
-    public void assertThatEntitiesAreRemovedById() {
+	@Test
+	public void assertThatEntitiesAreRemovedById() {
 
-        new NonStrictExpectations() {{
+		new NonStrictExpectations() {
+			{
 
-            mongoCollection.remove("{_id:#}", "42");
-            times = 1;
+				mongoCollection.remove("{_id:#}", "55dedd2b708db71cb20ca959");
+				times = 1;
 
-            mongoCollection.remove("{_id:#}", "17");
-            times = 1;
-        }};
+				mongoCollection.remove("{_id:#}", "55dedd2b708db71cb20ca958");
+				times = 1;
+			}
+		};
 
-        Singer janeDoe = new Singer("42")
-                .setFirstname("Jane")
-                .setLastname("Doe");
+		Singer janeDoe = new Singer("55dedd2b708db71cb20ca959").setFirstname("Jane").setLastname("Doe");
 
-        Singer johnDoe = new Singer("17")
-                .setFirstname("John")
-                .setLastname("Doe");
+		Singer johnDoe = new Singer("55dedd2b708db71cb20ca958").setFirstname("John").setLastname("Doe");
 
-        singerRepository.delete(Arrays.asList(janeDoe, johnDoe));
-    }
+		singerRepository.delete(Arrays.asList(janeDoe, johnDoe));
+	}
 
-    @Test
-    public void assertThatAllEntitiesAreRemoved() {
+	@Test
+	public void assertThatAllEntitiesAreRemoved() {
 
-        new NonStrictExpectations() {{
+		new NonStrictExpectations() {
+			{
 
-            mongoCollection.drop();
-            times = 1;
-        }};
+				mongoCollection.drop();
+				times = 1;
+			}
+		};
 
-        singerRepository.deleteAll();
-    }
+		singerRepository.deleteAll();
+	}
 
-    @Test
-    public void assertThatOneCanBeFound() {
+	@Test
+	public void assertThatOneCanBeFound() {
 
-        new NonStrictExpectations() {{
+		new NonStrictExpectations() {
+			{
 
-            mongoCollection.findOne("{_id:#}", "42").as(Singer.class);
-            times = 1;
-            result = new Singer("42");
+				mongoCollection.findOne("{_id:#}", "42").as(Singer.class);
+				times = 1;
+				result = new Singer("42");
 
-            mongoCollection.findOne("{_id:#}", "17").as(Singer.class);
-            times = 1;
-            result = null;
-        }};
+				mongoCollection.findOne("{_id:#}", "17").as(Singer.class);
+				times = 1;
+				result = null;
+			}
+		};
 
-        assertThat(singerRepository.exists("42"), is(true));
-        assertThat(singerRepository.exists("17"), is(false));
-    }
+		assertThat(singerRepository.exists("42"), is(true));
+		assertThat(singerRepository.exists("17"), is(false));
+	}
 }

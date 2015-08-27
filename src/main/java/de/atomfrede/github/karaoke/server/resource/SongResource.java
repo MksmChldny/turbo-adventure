@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/song")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class SongResource {
 
     private final SongRepository songRepository;
@@ -20,16 +21,13 @@ public class SongResource {
     }
 
     @GET
-    //Send a request with GET HTTP Method
     @Timed
-    //die @Timed-Annotation ist, um Performance-Metriken zu erheben
     public Songs getSongs() {
 
         return new Songs(songRepository.findAll());
     }
 
 	@POST 
-	//The POST HTTP method is used to add objects to a REST resource
 	@Timed
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Songs saveNewSong(@FormParam("title") String title,
