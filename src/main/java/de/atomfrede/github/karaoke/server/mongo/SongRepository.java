@@ -6,7 +6,6 @@ import de.atomfrede.github.karaoke.server.repository.CrudRepository;
 import org.bson.types.ObjectId;
 import org.jongo.MongoCollection;
 
-
 public class SongRepository extends JongoManaged implements CrudRepository<Song, String> {
 
     final String COLLECTION_NAME = "song";
@@ -62,7 +61,7 @@ public class SongRepository extends JongoManaged implements CrudRepository<Song,
 
     @Override
     public Song findOne(String s) {
-        return collection.findOne(ID_QUERY, s).as(Song.class);
+        return collection.findOne(ID_QUERY, new ObjectId(s) ).as(Song.class);
     }
 
     @Override

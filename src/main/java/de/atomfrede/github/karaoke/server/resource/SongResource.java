@@ -8,30 +8,30 @@ import io.dropwizard.jersey.PATCH;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/song")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class SongResource {
 
-    private final SongRepository songRepository;
+	private final SongRepository songRepository;
 
-    public SongResource(final SongRepository songRepository) {
-        this.songRepository = songRepository;
-    }
+	public SongResource(final SongRepository songRepository) {
+		this.songRepository = songRepository;
+	}
 
-    @GET
-    @Timed
-    public Songs getSongs() {
+	@GET
+	@Timed
+	public Songs getSongs() {
 
-        return new Songs(songRepository.findAll());
-    }
+		return new Songs(songRepository.findAll());
+	}
 
-	@POST 
+	@POST
 	@Timed
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Songs saveNewSong(@FormParam("title") String title,
-							 @FormParam("interpreter") String interpreter) {
+	public Songs saveNewSong(@FormParam("title") String title, @FormParam("interpreter") String interpreter) {
 
 		Song newSong = new Song();
 		newSong.setTitle(title).setInterpreter(interpreter);
@@ -41,31 +41,44 @@ public class SongResource {
 		return new Songs(songRepository.findAll());
 	}
 
-    @PATCH
-    @Timed
+	@PATCH
+	@Timed
 	@Path("{songId}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Songs updateSong(@PathParam("songId") String songId,
-							@FormParam("title") String title,
-							@FormParam("interpreter") String interpreter) {
-
-		if(songRepository.exists(songId)) {
+	public Songs updateSong(@PathParam("songId") String songId, @FormParam("title") String title,
+			@FormParam("interpreter") String interpreter) {
+		if (songRepository.exists(songId)) {
 			Song updateSong = new Song(songId);
 			updateSong.setTitle(title).setInterpreter(interpreter);
 
 			songRepository.update(updateSong);
+
+			System.out.println("Test");
+		} else {
+			System.out.println("Testelse");
 		}
+		return new Songs(songRepository.findAll());
+	}
 
-        return new Songs(songRepository.findAll());
-    }
+	@DELETE
+	@Timed
+	@Path("{songId}")
+	public Songs deleteSong(@PathParam("songId") String songId) {
 
-    @DELETE
-    @Timed
-    @Path("{songId}")
-    public Songs deleteSong(@PathParam("songId") String songId) {
+		songRepository.delete(songId);
 
-        songRepository.delete(songId);
+		return new Songs(songRepository.findAll());
+	}
 
-        return new Songs(songRepository.findAll());
-    }
+	@GET
+	@Timed
+	@Path("{id}")
+	public Song getSong(@PathParam("id") final String id) {
+		Song song = songRepository.findOne(id);
+		if (song != null) {
+			return song;
+		} else {
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+	}
 }

@@ -4,6 +4,7 @@ import com.mongodb.DB;
 import de.atomfrede.github.karaoke.server.entity.Pong;
 import de.atomfrede.github.karaoke.server.mongo.JongoManaged;
 import de.atomfrede.github.karaoke.server.mongo.MongoHealthCheck;
+import de.atomfrede.github.karaoke.server.resource.PingResource;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import mockit.Mocked;
 import mockit.integration.junit4.JMockit;

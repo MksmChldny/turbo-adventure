@@ -12,25 +12,25 @@ import java.util.Arrays;
 import javax.ws.rs.WebApplicationException;
 
 import de.atomfrede.github.karaoke.server.mongo.SongRepository;
+import de.atomfrede.github.karaoke.server.resource.SongResource;
 import io.dropwizard.testing.junit.ResourceTestRule;
 
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import de.atomfrede.github.karaoke.server.entity.Song;
 import de.atomfrede.github.karaoke.server.entity.Songs;
 
-
 public class SongResourceTest {
 	
 	private static final SongRepository repository = mock(SongRepository.class);
-	
-	
+		
 	@ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new SongResource(repository)).build();
-
+	
     @Test(expected = WebApplicationException.class)
     public void shouldReturnNotFoundWhenNotFound() {
 
@@ -40,7 +40,7 @@ public class SongResourceTest {
             resources.client().target("/song/321").request().get(Song.class);
         } catch (WebApplicationException e) {
 
-            assertThat(e.getResponse().getStatus(), is(405));
+            assertThat(e.getResponse().getStatus(), is(404));
             throw e;
         }
 
@@ -60,7 +60,7 @@ public class SongResourceTest {
         assertThat(songs.getSongs(), notNullValue());
 
     }
-
+    
     @Test
     public void shouldGetSingleSong() {
 

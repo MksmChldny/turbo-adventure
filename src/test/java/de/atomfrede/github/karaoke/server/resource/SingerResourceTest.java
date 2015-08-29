@@ -3,8 +3,10 @@ package de.atomfrede.github.karaoke.server.resource;
 import de.atomfrede.github.karaoke.server.entity.Singer;
 import de.atomfrede.github.karaoke.server.entity.Singers;
 import de.atomfrede.github.karaoke.server.mongo.SingerRepository;
+import de.atomfrede.github.karaoke.server.resource.SingerResource;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.WebApplicationException;
@@ -33,7 +35,7 @@ public class SingerResourceTest {
             resources.client().target("/singer/123").request().get(Singer.class);
         } catch (WebApplicationException e) {
 
-            assertThat(e.getResponse().getStatus(), is(405));
+            assertThat(e.getResponse().getStatus(), is(404));
             throw e;
         }
 
@@ -53,7 +55,7 @@ public class SingerResourceTest {
         assertThat(singers.getSingers(), notNullValue());
 
     }
-
+    
     @Test
     public void shouldGetSingleSinger() {
 

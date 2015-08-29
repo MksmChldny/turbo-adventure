@@ -62,7 +62,7 @@ public class SingerRepository extends JongoManaged implements CrudRepository<Sin
 
     @Override
     public Singer findOne(String s) {
-        return collection.findOne(ID_QUERY, s).as(Singer.class);
+        return collection.findOne(ID_QUERY, new ObjectId(s)).as(Singer.class);
     }
 
     @Override

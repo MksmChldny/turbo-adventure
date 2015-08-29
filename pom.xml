@@ -1,7 +1,6 @@
-<project
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-        xmlns="http://maven.apache.org/POM/4.0.0">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.atomfrede.github</groupId>
@@ -19,14 +18,15 @@
 		<jmockit.version>1.18</jmockit.version>
 		<jacoco.version>0.7.5.201505241946</jacoco.version>
 		<coveralls.maven.vesion>3.1.0</coveralls.maven.vesion>
+
 	</properties>
 
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<!-- Dropwizard components -->
@@ -36,11 +36,11 @@
 			<version>${dropwizard.version}</version>
 		</dependency>
 
-        <dependency>
-            <groupId>io.dropwizard.modules</groupId>
-            <artifactId>dropwizard-java8</artifactId>
+		<dependency>
+			<groupId>io.dropwizard.modules</groupId>
+			<artifactId>dropwizard-java8</artifactId>
 			<version>${dropwizard.java8.version}</version>
-        </dependency>
+		</dependency>
 
 		<dependency>
 			<groupId>org.mongodb</groupId>
@@ -60,19 +60,14 @@
 			<version>${jongo.version}</version>
 		</dependency>
 
-        <!--
-		<dependency>
-			<groupId>org.mongeez</groupId>
-			<artifactId>mongeez</artifactId>
-			<version>0.9.4</version>
-		</dependency>
-		-->
+		<!-- <dependency> <groupId>org.mongeez</groupId> <artifactId>mongeez</artifactId> 
+			<version>0.9.4</version> </dependency> -->
 
-        <dependency>
-            <groupId>com.github.atomfrede</groupId>
-            <artifactId>mongeez</artifactId>
-            <version>aa45f0ffd9</version>
-        </dependency>
+		<dependency>
+			<groupId>com.github.atomfrede</groupId>
+			<artifactId>mongeez</artifactId>
+			<version>aa45f0ffd9</version>
+		</dependency>
 
 		<dependency>
 			<groupId>io.dropwizard</groupId>
@@ -98,50 +93,63 @@
 			<version>${dropwizard.version}</version>
 		</dependency>
 
-        <dependency>
-            <groupId>com.github.sajato.logw</groupId>
-            <artifactId>logw-slf4j</artifactId>
-            <version>v0.1.0</version>
-        </dependency>
+		<dependency>
+			<groupId>com.github.sajato.logw</groupId>
+			<artifactId>logw-slf4j</artifactId>
+			<version>v0.1.0</version>
+		</dependency>
 
-        <dependency>
+		<dependency>
 			<groupId>org.jmockit</groupId>
 			<artifactId>jmockit</artifactId>
 			<version>${jmockit.version}</version>
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.47.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 
-	<plugins>
+		<plugins>
 
-		<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <executions>
-                    <execution>
-                        <id>generate-service-docs</id>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <doclet>com.carma.swagger.doclet.ServiceDoclet</doclet>
-                            <docletArtifact>
-                                <groupId>com.carma</groupId>
-                                <artifactId>swagger-doclet</artifactId>
-                                <version>1.0.4.1</version>
-                            </docletArtifact>
-                            <reportOutputDirectory>${project.build.outputDirectory}</reportOutputDirectory>
-                            <useStandardDocletOptions>false</useStandardDocletOptions>
-                            <additionalparam>-apiVersion 1 -docBasePath http://myapi -apiBasePath http://myapi</additionalparam>
-                        </configuration>
-                        <goals>
-                            <goal>javadoc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+						<id>generate-service-docs</id>
+						<phase>generate-resources</phase>
+						<configuration>
+							<doclet>com.carma.swagger.doclet.ServiceDoclet</doclet>
+							<docletArtifact>
+								<groupId>com.carma</groupId>
+								<artifactId>swagger-doclet</artifactId>
+								<version>1.0.4.1</version>
+							</docletArtifact>
+							<reportOutputDirectory>${project.build.outputDirectory}</reportOutputDirectory>
+							<useStandardDocletOptions>false</useStandardDocletOptions>
+							<additionalparam>-apiVersion 1 -docBasePath http://myapi
+								-apiBasePath http://myapi</additionalparam>
+						</configuration>
+						<goals>
+							<goal>javadoc</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 
 			<plugin>
@@ -187,7 +195,7 @@
 									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>de.atomfrede.github.karaoke.server.KaraokeApplication</mainClass>
+									<mainClass>de.atomfrede.github.karaoke.server.KaraokeApplication</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>
@@ -223,41 +231,42 @@
 				<version>${coveralls.maven.vesion}</version>
 			</plugin>
 		</plugins>
-	<pluginManagement>
-		<plugins>
-			<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-			<plugin>
-				<groupId>org.eclipse.m2e</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
-				<version>1.0.0</version>
-				<configuration>
-					<lifecycleMappingMetadata>
-						<pluginExecutions>
-							<pluginExecution>
-								<pluginExecutionFilter>
-									<groupId>
-										org.apache.maven.plugins
-									</groupId>
-									<artifactId>
-										maven-javadoc-plugin
-									</artifactId>
-									<versionRange>
-										[2.9.1,)
-									</versionRange>
-									<goals>
-										<goal>javadoc</goal>
-									</goals>
-								</pluginExecutionFilter>
-								<action>
-									<ignore></ignore>
-								</action>
-							</pluginExecution>
-						</pluginExecutions>
-					</lifecycleMappingMetadata>
-				</configuration>
-			</plugin>
-		</plugins>
-	</pluginManagement>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-javadoc-plugin
+										</artifactId>
+										<versionRange>
+											[2.9.1,)
+										</versionRange>
+										<goals>
+											<goal>javadoc</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>

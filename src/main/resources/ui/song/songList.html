@@ -11,7 +11,7 @@
 
     <div class="list-group list-group-striped margin-top-15" ng-show="songListLoaded" >
         <div class="list-group-item" ng-repeat="song in songList">
-            <div class="row" ng-show="!editMode || (editMode && song._id != actualEditSong._id)">
+            <div class="row" ng-show="!editMode || ( Mode && song._id != actualEditSong._id)">
                 <div class="col-md-10">
                     <h4 class="list-group-item-heading">{{song.title}}</h4>
                     <p class="list-group-item-text"><i>{{song.interpreter}}</i></p>
@@ -60,7 +60,7 @@
 
     <div class="margin-top-15" ng-show="songListLoaded">
         <div class="pull-right" >
-            <button type="button" class="btn btn-primary" ng-click="addSong();" ng-show="!addNewSong"  >
+            <button id="addNewSong" type="button" class="btn btn-primary" ng-click="addSong();" ng-show="!addNewSong"  >
                 <i class="fa fa-plus" ></i> Add new song
             </button>
         </div>
@@ -87,7 +87,7 @@
                 <button type="button" class="btn btn-warning pull-right margin-right-10" ng-click="cancelAddNewSong();" >
                     <i class="fa fa-times"></i>
                 </button>
-                <button type="button" class="btn btn-primary pull-right margin-right-10" ng-click="saveNewSong();" >
+                <button id="saveNewSong" type="button" class="btn btn-primary pull-right margin-right-10" ng-click="saveNewSong();" >
                     <i class="fa fa-save"></i>
                 </button>
             </div>
