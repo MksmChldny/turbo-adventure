@@ -17,4 +17,12 @@ public class SingerTest {
         assertThat(singer.firstname(), is("Firstname"));
         assertThat(singer.lastname(), is("Lastname"));
     }
+    
+    @Test
+    public void returnId () {
+    	
+    	Singer singer = new Singer();
+    	
+    	singer.id();
+    }   
 }

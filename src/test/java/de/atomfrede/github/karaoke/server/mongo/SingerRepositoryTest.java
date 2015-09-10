@@ -15,6 +15,8 @@ import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 
+import javax.swing.text.html.parser.Entity;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -115,7 +117,37 @@ public class SingerRepositoryTest {
 			}
 		};
 
-		assertThat(singerRepository.exists("42"), is(true));
-		assertThat(singerRepository.exists("17"), is(false));
+		assertThat(singerRepository.exists("55dedd2b708db71cb20ca959"), is(true));
+		assertThat(singerRepository.exists("55dedd2b708db71cb20ca959"), is(false));
+	}
+	
+	@Test
+	public void assertThatFindOneById(){
+		
+		SingerRepository singerRepository = new SingerRepository(database);
+		singerRepository.findOne("55dedd2b708db71cb20ca959");
+	}
+	
+	@Test
+	public void assertThatFindAllSinger(){
+		
+		SingerRepository singerRepository = new SingerRepository(database);
+		singerRepository.findAll();
+	}
+	
+	@Test
+	public void assertThatEntetiesCanbeSaved(){
+
+		SingerRepository singerRepository = new SingerRepository(database);
+		singerRepository.save(singerRepository.findOne("55dedd2b708db71cb20ca959"));
+		singerRepository.save(singerRepository.findAll());
+	}
+	
+	@Test
+	public void assertThatAllEntitiesCanBeUpdated(){
+		
+		SingerRepository singerRepository = new SingerRepository(database);
+		singerRepository.update(singerRepository.findAll());
+		
 	}
 }

@@ -33,11 +33,13 @@ public class SeleniumTest {
 		driver.findElement(By.id("saveNewSong")).click();		
 	}
 	
-	/*
 	@Test
 	public void testEditNewSong() {
-		driver.findElement(By.))
+		driver.findElement(By.id("songId")).click();
+		driver.findElement(By.cssSelector("class....."))
 	}
+	/*
+	
 	
 	@Test
 	public void testDelete(){

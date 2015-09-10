@@ -35,7 +35,8 @@ public class SingerResource {
 	@POST
 	@Timed
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Singers saveNewSinger(@FormParam("firstname") String firstname, @FormParam("lastname") String lastname) {
+	public Singers saveNewSinger(@FormParam("firstname") String firstname, 
+								 @FormParam("lastname") String lastname) {
 
 		Singer newSinger = new Singer();
 		newSinger.setFirstname(firstname).setLastname(lastname);
@@ -45,12 +46,14 @@ public class SingerResource {
 		return new Singers(singerRepository.findAll());
 	}
 
+	
 	@PATCH
 	@Timed
 	@Path("{singerId}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Singers updateSinger(@PathParam("singerId") String singerId, @FormParam("firstname") String firstname,
-			@FormParam("lastname") String lastname) {
+	public Singers updateSinger(@PathParam("singerId") String singerId, 
+								@FormParam("firstname") String firstname,
+								@FormParam("lastname") String lastname) {
 		if (singerRepository.exists(singerId)) {
 			Singer updateSinger = new Singer(singerId);
 			updateSinger.setFirstname(firstname).setLastname(lastname);

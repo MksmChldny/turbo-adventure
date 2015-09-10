@@ -17,7 +17,7 @@ public class MongoHealthCheck extends HealthCheck {
         this.mongo = mongo;
     }
 
-    @Override
+    @Overrides
     protected Result check() throws Exception {
         ExecutorService executor = null;
 
